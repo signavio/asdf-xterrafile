@@ -47,14 +47,9 @@ download_release() {
     fail "Unsupported platform '${platform}' found. Only Linux and Darwin are supported."
   fi
 
-  case $(uname -m) in
-  arm64) arch="x86_64" ;;
-  esac
-
   # TODO: Adapt the release URL convention for xterrafile
   # https://github.com/devopsmakers/xterrafile/releases/download/v2.3.1/xterrafile_2.3.1_Darwin_x86_64.tar.gz
-  # https://github.com/devopsmakers/xterrafile/releases/download/v0.1.11/xterrafile_darwin_amd64.gz
-  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${platform}_${arch}.tar.gz"
+  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${platform}_x86_64.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" "$url" || fail "Could not download $url"
