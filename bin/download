@@ -12,13 +12,13 @@ mkdir -p "$ASDF_DOWNLOAD_PATH/bin"
 
 # TODO: Adapt this to proper extension and adapt extracting strategy.
 release_file_extracted="$ASDF_DOWNLOAD_PATH/bin/$TOOL_NAME"
-release_file="${release_file_extracted}.gz"
+release_file="${release_file_extracted}.tar.gz"
 
 # Download tar.gz file to the download directory
 download_release "$ASDF_INSTALL_VERSION" "$release_file"
 
 #  Extract contents of tar.gz file into the download directory
-gunzip -c "${release_file}" >"${release_file_extracted}" || fail "Could not extract $release_file"
+tar -xzf "$release_file" -C "$ASDF_DOWNLOAD_PATH" --strip-components=1 || fail "Could not extract $release_file"
 chmod +x "$release_file_extracted"
 
 # Remove the tar.gz file since we don't need to keep it
