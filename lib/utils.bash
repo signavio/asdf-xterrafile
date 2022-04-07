@@ -5,7 +5,7 @@ set -euo pipefail
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for xterrafile.
 GH_REPO="https://github.com/devopsmakers/xterrafile"
 TOOL_NAME="xterrafile"
-TOOL_TEST="xterrafile --version"
+TOOL_TEST="xterrafile version"
 
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
@@ -37,7 +37,7 @@ list_all_versions() {
 }
 
 download_release() {
-  local version filename url platform arch
+  local version filename url platform
 
   version="$1"
   filename="$2"
@@ -49,7 +49,7 @@ download_release() {
 
   # TODO: Adapt the release URL convention for xterrafile
   # https://github.com/devopsmakers/xterrafile/releases/download/v2.3.1/xterrafile_2.3.1_Darwin_x86_64.tar.gz
-  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${platform}_x86_64.tar.gz"
+  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${version}_${platform}_x86_64.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" "$url" || fail "Could not download $url"
@@ -72,7 +72,7 @@ install_version() {
     # TODO: Asert xterrafile executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
-    test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
+    test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
 
     echo "$TOOL_NAME $version installation was successful!"
   ) || (
