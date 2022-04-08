@@ -2,10 +2,10 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for aws-mfa-login.
-GH_REPO="https://github.com/signavio/aws-mfa-login"
-TOOL_NAME="aws-mfa-login"
-TOOL_TEST="aws-mfa-login --version"
+# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for xterrafile.
+GH_REPO="https://github.com/devopsmakers/xterrafile"
+TOOL_NAME="xterrafile"
+TOOL_TEST="xterrafile version"
 
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
@@ -14,7 +14,7 @@ fail() {
 
 curl_opts=(-fsSL)
 
-# NOTE: You might want to remove this if aws-mfa-login is not hosted on GitHub releases.
+# NOTE: You might want to remove this if xterrafile is not hosted on GitHub releases.
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
   curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
 fi
@@ -32,12 +32,12 @@ list_github_tags() {
 
 list_all_versions() {
   # TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-  # Change this function if aws-mfa-login has other means of determining installable versions.
+  # Change this function if xterrafile has other means of determining installable versions.
   list_github_tags
 }
 
 download_release() {
-  local version filename url platform arch
+  local version filename url platform
 
   version="$1"
   filename="$2"
@@ -47,14 +47,9 @@ download_release() {
     fail "Unsupported platform '${platform}' found. Only Linux and Darwin are supported."
   fi
 
-  case $(uname -m) in
-  x86_64) arch="amd64" ;;
-  arm64) arch="arm64" ;;
-  esac
-
-  # TODO: Adapt the release URL convention for aws-mfa-login
-  # https://github.com/signavio/aws-mfa-login/releases/download/v0.1.11/aws-mfa-login_darwin_amd64.gz
-  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${platform}_${arch}.gz"
+  # TODO: Adapt the release URL convention for xterrafile
+  # https://github.com/devopsmakers/xterrafile/releases/download/v2.3.1/xterrafile_2.3.1_Darwin_x86_64.tar.gz
+  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${version}_${platform}_x86_64.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" "$url" || fail "Could not download $url"
@@ -74,10 +69,10 @@ install_version() {
     echo "install path"
     cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-    # TODO: Asert aws-mfa-login executable exists.
+    # TODO: Asert xterrafile executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
-    test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
+    test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
 
     echo "$TOOL_NAME $version installation was successful!"
   ) || (

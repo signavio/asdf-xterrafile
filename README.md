@@ -1,9 +1,9 @@
 <div align="center">
 
-# asdf-aws-mfa-login [![Build](https://github.com/signavio/asdf-aws-mfa-login/actions/workflows/build.yml/badge.svg)](https://github.com/signavio/asdf-aws-mfa-login/actions/workflows/build.yml) [![Lint](https://github.com/signavio/asdf-aws-mfa-login/actions/workflows/lint.yml/badge.svg)](https://github.com/signavio/asdf-aws-mfa-login/actions/workflows/lint.yml)
+# asdf-xterrafile [![Build](https://github.com/signavio/asdf-xterrafile/actions/workflows/build.yml/badge.svg)](https://github.com/signavio/asdf-xterrafile/actions/workflows/build.yml) [![Lint](https://github.com/signavio/asdf-xterrafile/actions/workflows/lint.yml/badge.svg)](https://github.com/signavio/asdf-xterrafile/actions/workflows/lint.yml)
 
 
-[aws-mfa-login](https://github.com/signavio/aws-mfa-login) plugin for the [asdf version manager](https://asdf-vm.com).
+[xterrafile](https://github.com/signavio/xterrafile) plugin for the [asdf version manager](https://asdf-vm.com).
 
 </div>
 
@@ -24,25 +24,25 @@
 Plugin:
 
 ```shell
-asdf plugin add aws-mfa-login
+asdf plugin add xterrafile
 # or
-asdf plugin add aws-mfa-login https://github.com/signavio/asdf-aws-mfa-login.git
+asdf plugin add xterrafile https://github.com/signavio/asdf-xterrafile.git
 ```
 
-aws-mfa-login:
+xterrafile:
 
 ```shell
 # Show all installable versions
-asdf list-all aws-mfa-login
+asdf list-all xterrafile
 
 # Install specific version
-asdf install aws-mfa-login latest
+asdf install xterrafile latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global aws-mfa-login latest
+asdf global xterrafile latest
 
-# Now aws-mfa-login commands are available
-aws-mfa-login --version
+# Now xterrafile commands are available
+xterrafile --version
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
@@ -52,11 +52,11 @@ install & manage versions.
 
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
-[Thanks goes to these contributors](https://github.com/signavio/asdf-aws-mfa-login/graphs/contributors)!
+[Thanks goes to these contributors](https://github.com/signavio/asdf-xterrafile/graphs/contributors)!
 
 ## Testing
 ```bash
-asdf plugin-test aws-mfa-login https://github.com/signavio/asdf-aws-mfa-login --asdf-tool-version latest --asdf-plugin-gitref $(git rev-parse HEAD) aws-mfa-login --version
+asdf plugin-test xterrafile https://github.com/signavio/asdf-xterrafile --asdf-tool-version latest --asdf-plugin-gitref $(git rev-parse HEAD) xterrafile --version
 ```
 
 
