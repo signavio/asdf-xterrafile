@@ -39,9 +39,11 @@ list_all_versions() {
 download_release() {
   local version filename url platform
 
-  version=$(echo $1 | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+  version="$1"
+  echo "first version: $version"
   filename="$2"
-
+  version=$(echo $version | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+  echo "second version: $version"
   platform="$(uname | tr '[:upper:]' '[:lower:]')"
   if [[ ! (${platform} == linux || ${platform} == darwin) ]]; then
     fail "Unsupported platform '${platform}' found. Only Linux and Darwin are supported."
