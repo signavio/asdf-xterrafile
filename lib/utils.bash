@@ -39,10 +39,8 @@ list_all_versions() {
 download_release() {
   local version filename url platform
 
-  version="$1"
+  version=$(echo $1 | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
   filename="$2"
-
-  version=$(echo $version | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
 
   platform="$(uname | tr '[:upper:]' '[:lower:]')"
   if [[ ! (${platform} == linux || ${platform} == darwin) ]]; then
