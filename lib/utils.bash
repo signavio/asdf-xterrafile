@@ -42,6 +42,8 @@ download_release() {
   version="$1"
   filename="$2"
 
+  version=$(echo $version | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+
   platform="$(uname | tr '[:upper:]' '[:lower:]')"
   if [[ ! (${platform} == linux || ${platform} == darwin) ]]; then
     fail "Unsupported platform '${platform}' found. Only Linux and Darwin are supported."
