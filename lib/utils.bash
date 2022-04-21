@@ -40,9 +40,9 @@ download_release() {
   local version filename url platform
 
   version="$1"
-  echo "first version: $version"
   filename="$2"
 
+  # keeping it commented out
   #version=$(echo $version | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
   platform="$(uname | tr '[:upper:]' '[:lower:]')"
   if [[ ! (${platform} == linux || ${platform} == darwin) ]]; then
@@ -52,7 +52,6 @@ download_release() {
   # TODO: Adapt the release URL convention for xterrafile
   # https://github.com/devopsmakers/xterrafile/releases/download/v2.3.1/xterrafile_2.3.1_Darwin_x86_64.tar.gz
   url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${version}_${platform}_x86_64.tar.gz"
-  echo $url
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" "$url" || fail "Could not download $url"
 }
